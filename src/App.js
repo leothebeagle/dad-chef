@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Table from './Table';
 import Form from './Form';
+import Counter from './Counter'
 
 class App extends Component {
     state = {
@@ -34,6 +35,7 @@ class App extends Component {
                 />
                 <h3>Add New</h3>
                 <Form handleSubmit={this.handleSubmit} />
+                <Counter />
             </div>
         );
     }
