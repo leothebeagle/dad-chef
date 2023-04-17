@@ -21,8 +21,7 @@ const RecipeNameForm = (props) => {
                 }
             }
         >
-            <label>Recipe Name</label>
-            <input type="text" name="recipeName" value={recipeName} onChange={handleInputChange}/>
+            <input type="text" name="recipeName" value={recipeName} onChange={handleInputChange} placeholder="Enter recipe name..."/>
             <button>Submit Recipe Name</button>
         </form>
     )
