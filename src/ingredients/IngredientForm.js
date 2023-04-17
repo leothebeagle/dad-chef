@@ -1,14 +1,13 @@
 import React, {Component} from 'react';
 
-class Form extends Component {
+class IngredientForm extends Component {
 
     initialState = {
-        name: '',
-        job: ''
+        ingredientName: '',
+        quantity: ''
     };
 
     state = this.initialState;
-    
 
     handleChange = event => {
         const { name, value } = event.target;
@@ -21,28 +20,28 @@ class Form extends Component {
     onFormSubmit = (event) => {
         event.preventDefault();
         
-        this.props.handleSubmit(this.state);
+        this.props.submitIngredient(this.state);
         this.setState(this.initialState);
     }
 
     render() {
-        const { name, job } = this.state; 
+        const { ingredientName, quantity } = this.state; 
 
         return (
             <form onSubmit={this.onFormSubmit}>
-                <label for="name">Name</label>
+                <label for="ingredientName">Ingredient Name</label>
                 <input 
                     type="text" 
-                    name="name" 
-                    id="name"
-                    value={name} 
+                    name="ingredientName" 
+                    id="ingredientName"
+                    value={ingredientName} 
                     onChange={this.handleChange} />
-                <label for="job">Job</label>
+                <label for="quantity">Quantity</label>
                 <input 
                     type="text" 
-                    name="job" 
-                    id="job"
-                    value={job} 
+                    name="quantity" 
+                    id="quantity"
+                    value={quantity} 
                     onChange={this.handleChange} />
                 <button type="submit">
                     Submit
@@ -52,4 +51,4 @@ class Form extends Component {
     }
 }
 
-export default Form;
+export default IngredientForm;
