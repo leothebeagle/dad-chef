@@ -20,7 +20,7 @@ class IngredientForm extends Component {
     onFormSubmit = (event) => {
         event.preventDefault();
         
-        this.props.handleSubmit(this.state);
+        this.props.submitIngredient(this.state);
         this.setState(this.initialState);
     }
 
