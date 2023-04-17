@@ -12,12 +12,13 @@ const TableHeader = () => {
 }
 
 const TableBody = (props) => { 
-    const rows = props.ingredientData.map((row, index) => {
+    console.log(props)
+    const rows = props.ingredientData.map((ingredient, index) => {
         return (
             <tr key={index}>
-                <td>{row.ingredientName}</td>
-                <td>{row.quantity}</td>
-                <td><button onClick={() => props.removeIngredient(index)}>Delete</button></td>
+                <td>{ingredient.ingredientName}</td>
+                <td>{ingredient.quantity}</td>
+                <td><button onClick={() => props.removeIngredient(ingredient)}>Delete</button></td>
             </tr>
         );
     });
