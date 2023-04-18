@@ -4,18 +4,34 @@ import IngredientForm from '../ingredients/IngredientForm';
 import RecipeNameForm from './RecipeNameForm';
 
 const CreateRecipePage = () => {
+    
+    const ingredientsListInitialState = []
 
-    const ingredientsInitialState = [{
+    const ingredientFormInitialState = {
         name:"",
         quantity:""
-    }]
+    }
 
-    const [ingredients, setIngredients] = useState(ingredientsInitialState);
+    const [ingredientsList, setIngredients] = useState(ingredientsListInitialState);
+    const [ingredientFormState, setIngredientFormState] = useState(ingredientFormInitialState);
     const [recipeName, setRecipeName] = useState("");
+
+    const onIngredientFormChange = event => {
+        const { name, value } = event;
+        setIngredientFormState((prevState) => ({...prevState, [name]: value}));
+    }
+
+    const onIngredientFormSubmit = event => {
+        if (ingredientFormState.ingredientName == '' || ingredientFormState.quantity =='') return;
+        event.preventDefault();
+        setIngredients(
+            [...ingredientsList, ingredientFormState]
+        );
+    }
 
     const removeIngredient = ingredient => {
         setIngredients(
-            ingredients.filter((i) => { 
+            ingredientsList.filter((i) => { 
                 return i !== ingredient;
             })
         );
@@ -27,24 +43,16 @@ const CreateRecipePage = () => {
         )
     } 
 
-    const submitIngredient = ingredient => {
-        if (ingredient.ingredientName == '' || ingredient.quantity =='') return;
-
-        setIngredients(
-            [...ingredients, ingredient]
-        );
-    }
-    
     return (
         <div className="container">
             <h1>Create a Recipe</h1>
             <h2>{recipeName}</h2>
             <IngredientTable
-                ingredientData={ingredients}
+                ingredientData={ingredientsList}
                 removeIngredient={removeIngredient}
             />
             <h3>Add New Ingredient</h3>
-            <IngredientForm submitIngredient={submitIngredient} />
+            <IngredientForm onSubmit={onIngredientFormSubmit} onChange={onIngredientFormChange}/>
             {recipeName === '' ? <RecipeNameForm submitRecipeName={submitRecipeName} /> : null }
             
         </div>
