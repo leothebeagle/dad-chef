@@ -15,14 +15,15 @@ const CreateRecipePage = () => {
     const [ingredientsList, setIngredients] = useState(ingredientsListInitialState);
     const [ingredientFormState, setIngredientFormState] = useState(ingredientFormInitialState);
     const [recipeName, setRecipeName] = useState("");
-
+    const [editMode, setEditMode] = useState(true);
+    
     const onIngredientFormChange = event => {
         const { name, value } = event.target;
         setIngredientFormState((prevState) => ({...prevState, [name]: value}));
     }
 
     const onIngredientFormSubmit = event => {
-        if (ingredientFormState.ingredientName == '' || ingredientFormState.ingredientQuantity =='') return;
+        if (ingredientFormState.ingredientName === '' || ingredientFormState.ingredientQuantity ==='') return;
         event.preventDefault();
         setIngredients(
             [...ingredientsList, ingredientFormState]
@@ -37,25 +38,45 @@ const CreateRecipePage = () => {
             })
         );
     }
+    const onRecipeNameChange = (event) => {
+        setRecipeName(event.target.value);
+      };
 
-    const submitRecipeName = (recipeName) => {
-        setRecipeName(
-            recipeName
-        )
-    } 
+    const onRecipeNameSubmit = (event) => {
+        event.preventDefault();
+        setEditMode(false);
+    }
+
+    const enableEditMode = () => {
+        setEditMode(true);
+    }
+
+    const HeaderContent = editMode ? (
+        <form onSubmit={onRecipeNameSubmit}>
+          <input
+            type="text"
+            placeholder="Enter recipe name"
+            value={recipeName}
+            onChange={onRecipeNameChange}
+          />
+          <button type="submit">Submit</button>
+        </form>
+      ) : (
+        <h2 onClick={enableEditMode}>
+          {recipeName}
+          <span style={{ marginLeft: '10px', cursor: 'pointer' }}>✏️</span>
+        </h2>
+      );
 
     return (
         <div className="container">
-            <h1>Create a Recipe</h1>
-            <h2>{recipeName}</h2>
+            <h2>{HeaderContent}</h2>
+            <h3>Add New Ingredient</h3>
+            <IngredientForm formState={ingredientFormState} onChange={onIngredientFormChange} onSubmit={onIngredientFormSubmit} />
             <IngredientTable
                 ingredientData={ingredientsList}
                 removeIngredient={removeIngredient}
             />
-            <h3>Add New Ingredient</h3>
-            <IngredientForm formState={ingredientFormState} onChange={onIngredientFormChange} onSubmit={onIngredientFormSubmit} />
-            {recipeName === '' ? <RecipeNameForm submitRecipeName={submitRecipeName} /> : null }
-            
         </div>
     );
 
