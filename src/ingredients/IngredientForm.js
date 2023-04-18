@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class IngredientForm extends Component {
+const IngredientForm = () => {
 
     initialState = {
         ingredientName: '',
