@@ -5,11 +5,11 @@ import RecipeNameForm from './RecipeNameForm';
 
 const CreateRecipePage = () => {
     
-    const ingredientsListInitialState = []
+    const ingredientsListInitialState = [];
 
     const ingredientFormInitialState = {
-        name:"",
-        quantity:""
+        ingredientName:"",
+        ingredientQuantity:""
     }
 
     const [ingredientsList, setIngredients] = useState(ingredientsListInitialState);
@@ -17,16 +17,17 @@ const CreateRecipePage = () => {
     const [recipeName, setRecipeName] = useState("");
 
     const onIngredientFormChange = event => {
-        const { name, value } = event;
+        const { name, value } = event.target;
         setIngredientFormState((prevState) => ({...prevState, [name]: value}));
     }
 
     const onIngredientFormSubmit = event => {
-        if (ingredientFormState.ingredientName == '' || ingredientFormState.quantity =='') return;
+        if (ingredientFormState.ingredientName == '' || ingredientFormState.ingredientQuantity =='') return;
         event.preventDefault();
         setIngredients(
             [...ingredientsList, ingredientFormState]
         );
+        setIngredientFormState(ingredientFormInitialState);
     }
 
     const removeIngredient = ingredient => {
@@ -52,7 +53,7 @@ const CreateRecipePage = () => {
                 removeIngredient={removeIngredient}
             />
             <h3>Add New Ingredient</h3>
-            <IngredientForm onSubmit={onIngredientFormSubmit} onChange={onIngredientFormChange}/>
+            <IngredientForm formState={ingredientFormState} onChange={onIngredientFormChange} onSubmit={onIngredientFormSubmit} />
             {recipeName === '' ? <RecipeNameForm submitRecipeName={submitRecipeName} /> : null }
             
         </div>
