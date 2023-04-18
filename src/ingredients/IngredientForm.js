@@ -1,12 +1,21 @@
-import React from 'react';
+import React, {useRef} from 'react';
 
 const IngredientForm = ({formState, onChange, onSubmit}) => {
     const { ingredientName, ingredientQuantity } = formState;
+    const ingredientNameRef = useRef(null);
+
+    const handleSubmit = (event) => {
+        onSubmit(event);
+        if (ingredientNameRef) {
+            ingredientNameRef.current.focus()
+        }
+    }
 
     return (
-        <form onSubmit={onSubmit}>
+        <form onSubmit={handleSubmit}>
             <label for="ingredientName">Ingredient Name</label>
             <input 
+                ref={ingredientNameRef}
                 type="text" 
                 name="ingredientName" 
                 id="ingredientName"
