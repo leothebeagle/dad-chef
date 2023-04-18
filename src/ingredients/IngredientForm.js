@@ -1,54 +1,29 @@
-import React, {Component} from 'react';
+import React from 'react';
 
-class IngredientForm extends Component {
+const IngredientForm = ({formState, onChange, onSubmit}) => {
+    const { ingredientName, ingredientQuantity } = formState;
 
-    initialState = {
-        ingredientName: '',
-        quantity: ''
-    };
-
-    state = this.initialState;
-
-    handleChange = event => {
-        const { name, value } = event.target;
-
-        this.setState({
-            [name] : value
-        });
-    }
-
-    onFormSubmit = (event) => {
-        event.preventDefault();
-        
-        this.props.submitIngredient(this.state);
-        this.setState(this.initialState);
-    }
-
-    render() {
-        const { ingredientName, quantity } = this.state; 
-
-        return (
-            <form onSubmit={this.onFormSubmit}>
-                <label for="ingredientName">Ingredient Name</label>
-                <input 
-                    type="text" 
-                    name="ingredientName" 
-                    id="ingredientName"
-                    value={ingredientName} 
-                    onChange={this.handleChange} />
-                <label for="quantity">Quantity</label>
-                <input 
-                    type="text" 
-                    name="quantity" 
-                    id="quantity"
-                    value={quantity} 
-                    onChange={this.handleChange} />
-                <button type="submit">
-                    Submit
-                </button>
-            </form>
-        );
-    }
+    return (
+        <form onSubmit={onSubmit}>
+            <label for="ingredientName">Ingredient Name</label>
+            <input 
+                type="text" 
+                name="ingredientName" 
+                id="ingredientName"
+                value={ingredientName} 
+                onChange={onChange} />
+            <label for="ingredientQuantity">Quantity</label>
+            <input 
+                type="text" 
+                name="ingredientQuantity" 
+                id="ingredientQuantity"
+                value={ingredientQuantity} 
+                onChange={onChange} />
+            <button type="submit">
+                Submit
+            </button>
+        </form>
+    );
 }
 
 export default IngredientForm;

@@ -17,7 +17,7 @@ const TableBody = (props) => {
         return (
             <tr key={index}>
                 <td>{ingredient.ingredientName}</td>
-                <td>{ingredient.quantity}</td>
+                <td>{ingredient.ingredientQuantity}</td>
                 <td><button onClick={() => props.removeIngredient(ingredient)}>Delete</button></td>
             </tr>
         );
