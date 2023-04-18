@@ -1,4 +1,4 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import IngredientTable from '../ingredients/IngredientTable';
 import IngredientForm from '../ingredients/IngredientForm';
 import RecipeNameForm from './RecipeNameForm';
