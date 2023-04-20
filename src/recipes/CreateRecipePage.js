@@ -45,7 +45,7 @@ const CreateRecipePage = () => {
     }
 
     const headerContent = editRecipeNameFlag ? (
-        <RecipeNameForm onSubmit={onRecipeNameSubmit} />
+        <RecipeNameForm onSubmit={onRecipeNameSubmit} existingRecipeName={recipeName}/>
       ) : (
         <h2 onClick={() => {setEditRecipeNameFlag(true)} }>
           {recipeName}

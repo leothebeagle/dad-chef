@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
-const RecipeNameForm = ({ onSubmit }) => {
+const RecipeNameForm = ({ onSubmit, existingRecipeName }) => {
     const initialFormState = ""
 
-    const [ recipeName, setRecipeName ] = useState(initialFormState);
-   
+    const [ recipeName, setRecipeName ] = useState(existingRecipeName);
+
     const handleInputChange = (event) => {
         const { value } = event.target;
         setRecipeName(value)
@@ -21,7 +21,7 @@ const RecipeNameForm = ({ onSubmit }) => {
     }
     return (
         <form onSubmit={handleSubmit}>
-            <input type="text" name="recipeName" value={recipeName} onChange={handleInputChange} placeholder="Enter recipe name..."/>
+            <input type="text" name="recipeName" value={recipeName} onChange={handleInputChange} placeholder={recipeName}/>
             <button>Submit</button>
         </form>
     )
